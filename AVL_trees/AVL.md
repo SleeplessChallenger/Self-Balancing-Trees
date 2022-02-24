@@ -18,7 +18,7 @@
 ```bash
 	 n
 	/ \
-   Tl  Tr
+       Tl  Tr
 ```
 - Then, we have a <b>height</b> of a tree.
 	+ it's 0 if we have only **root**
@@ -39,7 +39,7 @@
 		we add + 1 after 1, hence we have heigh of 1. Then, H(4) = -1 - (-1) = 0
 
 ```bash
-		3
+	    3
 	   / \
 	  1   4
 	 / \
@@ -48,13 +48,13 @@
 
 - Now, let's peruse non-AVL tree:
 ```bash
-		 4
-		/
+	     4
+	    /
 	   3
 	  /
 	 2
 	/ \
-   1   0
+       1   0
 ```
 
 - After eyeboll, we come to the closing: 2 - (-1) = 2 + 1 = 3 => broken the **threshold** && it's not the AVL Tree.
@@ -106,8 +106,8 @@
 - Start rotation:
 	+ focus only at **x** && **y**
 ```bash
-	 3       2
-	/		/ \
+     3       2
+    /	    / \
    2    => 1   3
   /
  1
@@ -128,10 +128,10 @@
 - If we do <i>right</i> rotation, then it'll give us skewed tree to the right
 
 ```bash
-	3      1
-   / 		\
+    3       1
+   / 	     \
   1   =>     3 - BAD as it has -2 overall balance
-   \		/
+   \	    /
     2	   2
 ```
 
@@ -140,7 +140,7 @@
 	+ then apply **right** to 2 && 3:
 
 ```bash
-		3       3     2
+            3       3     2
 	   /       /     / \
 	  1   =>  2  => 1   3 
 	   \     /
