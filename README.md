@@ -6,12 +6,14 @@
   - Binary Search Tree
   - Self-balancing Trees
   - Heaps
+  - Trie
 
 - The above list isn't finite and may be prolonged. But I decided to focus
-  on Self-balancing trees as they seem pretty juicy.
+  on self-balancing trees as they seem pretty juicy.
 
 <h3>Structure of the repo</h3>
 
-- For now there is `AVL trees` folder where you can find my notes and Python implementation.
+- For now there is `AVL trees` folder where you can find my notes<br>
+  and Python\Kotlin implementations.
 
-# TODO: add Kotlin implementation and cover Red-Black trees
+# TODO: cover Red-Black trees
