@@ -1,8 +1,8 @@
 <h2>AVL trees notes</h2>
 <hr>
 
-- It is also known as one of the self-balancing trees. Purpose? => Avoid Skewdness
-- There is a balance (aka threshold) which will ensure that we don't have a skedness. If it's broken `=>` we'll have our tree rebalanced
+- It is also known as one of the self-balancing trees. Purpose? => Avoid Skewness
+- There is a balance (aka threshold) which will ensure that we don't have a skewness. If it's broken `=>` we'll have our tree rebalanced
 
 <ol>
 	<li>Balance</li>
@@ -18,11 +18,11 @@
 ```bash
 	 n
 	/ \
-       Tl  Tr
+      Tl  Tr
 ```
 - Then, we have a <b>height</b> of a tree.
 	+ it's 0 if we have only **root**
-	+ it's `-1 || null` if we doesn't have anything
+	+ it's `-1 || null` if we don't have anything
 
 - Set of actions:
 	+ `H = max(H(Tl), H(Tr)) + 1`
@@ -62,8 +62,8 @@
 	+ B(1) = -1 - (-1) = 0
 	+ B(0) = -1 - (-1) = 0
 	+ B(2) = 0 - 0 = 0. Then we add 1 if we calc. height (see above)
-	+ B(3) = 0 - (-1) = 1
-	+ B(4) = 1 - (-1) = 2
+	+ B(3) = 1 - (-1) = 2
+	+ B(4) = 2 - (-1) = 3
 
 <hr>
 <h3>Rotations</h4>
@@ -93,7 +93,7 @@
 
 <h5>1.1 Right rotation</h5>
 
-- Let's inser values 3,2,1
+- Let's insert values 3,2,1
 	+ H(1): max(-1,-1) + 1 = 0
 	+ H(2): max(0,-1) + 1 => 1
 	+ H(3): max(1,-1) + 1 => 2
@@ -122,7 +122,7 @@
 
 - Now let's calc. Balance:
 	+ B(2) = -1 - (-1) = 0
-	+ B(1) = 0 - (-1) = 1
+	+ B(1) = -1 - 0 = -1
 	+ B(3) = 1 - (-1) = 2
 
 - If we do <i>right</i> rotation, then it'll give us skewed tree to the right
@@ -154,7 +154,7 @@
 
 - If we calc **Balance**:
 	+ B(3) = -1 - (-1) = 0
-	+ B(2) = 0 - (-1) = 1
+	+ B(2) = -1 - 0 = -1
 	+ B(1) = -1 - 1 = -2
 
 - Let's calc. height before <i>rotation</i>:

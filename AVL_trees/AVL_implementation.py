@@ -222,7 +222,7 @@ class AvlTree:
         y_node = node.left
         z_node = y_node.right
 
-        # perofrm rotation
+        # perform rotation
         y_node.right = node
         node.left = z_node
 
