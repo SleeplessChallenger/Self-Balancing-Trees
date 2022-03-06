@@ -68,17 +68,17 @@ of the tree -> re-colour it (in Red)
         \
          4-R
 ```
-	Again red-red relationship in `10 - 6`. Steps resemble the ones above: look at parent's (10) sibling which is 20 in our case. It's black: **Look below for 3**s
+	Again red-red relationship in `10 - 6`. Steps resemble the ones above: look at parent's (10) sibling which is 20 in our case. It's black: **Look below for 3**
 
 2. In 1.1 there is second case: if parent of leaf-node parent & sibling is `root`?
 ```bash
 		 10-B
 	  /        \
-	-10-R     20-R
+	-10-B     20-B
 	/  \      /    \
-  -20-B 6-B  15-B 25-B
+  -20-B 6-R  15-B 25-B
         /  \
-       2-R  8-R  
+       2-B  8-B  
         \
          4-R
 ```
@@ -87,11 +87,17 @@ of the tree -> re-colour it (in Red)
 
 All in all, we keep rechecking the parent & subling till there is Red-Red relationship
 
-3. If sibling is Black or absent at all. In this situation we have 4 cases:
-	- left rotate
-	- right rotate
-	- left-right rotate
-	- rigth-left rotate
+3. If sibling is **Black** or **absent** at all. In this situation we have 4 cases:
+	- right rotation
+	- left-right rotation
+	- left rotation
+	- rigth-left rotation
+
+PS: yeah, they resemble AVL-Tree rotations
+
+<h4>If sibling is absent</h4>
+
+<h5>Right rotation</h5>
 
 Let's insert 13 as new leaf node
 ```bash
@@ -100,7 +106,65 @@ Let's insert 13 as new leaf node
 	-10-B    20-B
 	  \       /
 	   7-R   15-R 
-	  	
+             /
+            13-R  	
 ```
+1. Firstly, as usual, there is red-red conflict. We look at the sibling of parent (== `15`), but it's missing. We make:
+	* **right rotation** The left part of the tree will be the same, but in the right subtree there will be changes
+	* switch colours of `x` & `y`. Recall `x` & `y` from AVl-Tree
+
+```bash
+		10-B
+	  /      \
+	-10-B    15-B - Becomes Black
+	  \       /  \
+	   7-R  13-R  20-R	- Becomes Red
+```
+
+<h5>Left-right rotation</h5>
+
+Let's insert `17`
+
+```bash
+		10-B
+	  /      \
+	-10-B    20-B
+	  \       /
+	   7-R   15-R 
+	   		   \
+	   	      17-R
+```
+
+1. At first make `left rotation`
+```bash
+		10-B
+	  /      \
+	-10-B    20-B
+	  \       /
+	   7-R   17-R 
+	   		 /
+	   	   15-R
+```
+
+2. Then make `right`
+```bash
+		 10-B
+	  /       \
+	-10-B     17-R -> change to Black
+	  \       /   \
+	   7-R   15-R 20-B -> change to Red
+```
+
+3. Same as in `right` rotation: re-colour `x` and `y` (i.e. swap colours)
+
+<h5>Right rotation</h5>
+
+# TODO: self-study
+
+<h5>Right-left rotation</h5>
+
+# TODO: self-study
+
+<h4>If sibling is black</h4>
 
 
