@@ -167,4 +167,158 @@ Let's insert `17`
 
 <h4>If sibling is black</h4>
 
+- After we've inserted, `parent` of leaf and it's sibling
+	will never be black, it's always red. But after further
+	recolouring we may end up with `sibling` being black.
 
+- Insert 4 as a leaf node
+
+```bash
+		 10-B
+	  /			\
+	 -10-R 		20-B
+	 /    \      /  \
+	-20-B 6-B  15-R  30-R
+		  /  \
+		 1-R 9-R	 
+		  \
+		  4-R
+```
+
+1. Make `parent` & `sibling` of parent **black**
+
+```bash
+		 10-B
+	  /			\
+	 -10-R 		20-B
+	 /    \      /  \
+	-20-B 6-R  15-R  30-R
+		  /  \
+		 1-B 9-B	 
+		  \
+		  4-R
+```
+
+2. So, we create a red-red situation: `6-10`
+	=> fix it by looking at sibling of parent, where:
+		- parent: -10
+		- sibling: 20
+	=> We see that sibling is **black**. Solution? -> some rotation
+
+But which rotation is an option? Let's see: `6` is a **right** child
+	of `-10` && `-10` is a **left** child of `10`. As a result, we need to do: Left rotation followed by right rotation.
+	<ul><p>Position of node followed by required rotation</p>
+		<li>LL -> Right</li>
+		<li>RL -> Left-Right</li>
+		<li>RR -> Left</li>
+		<li>LR -> Right-Left</li>
+	</ul>
+
+<b>PS: We need to start identification of the desired rotation<br>
+	from current **red** to the closest root<b>
+
+2.1 Make left rotation at first (10-x, 6-y)
+```bash
+		 10-B
+	   /      \
+	  6-R     20-B
+     /   \     /    \
+   -10-R 9-B  15-R 30-R
+   /  \
+ -20-B 1-B
+        \
+         4-R
+```
+
+2.2 Make right rotation then: x-10, y-6 && flip colours of `x` & `y`
+```bash
+		 6-R -> B
+	  /		    \
+	 -10-R	10-B -> R
+	 /  \	    /   \
+  -20-B 1-B   9-B  20-B
+	 	  \        /    \
+	 	   4-R    15-R 30-R	 	 
+```
+
+
+# TODO: In article write eveyrthing in greater detail: how rotation is done
+
+<h4>Why do rotations work?</h4>
+
+- Let's assume we have a very large tree where only some chunk is
+seen to us:
+- why `n-2`: we already have 2 black nodes
+- why `n-1`: in this subtree we have 1 black node
+
+```bash
+	nodes
+		\
+		 2-B
+	   /    \
+	  1-B    3-R
+	  / \   /  \
+	  v  w  x   4-R
+	n-2 n-2 n-1 / \
+	  		    y  z
+	  		   n-1 n-1	
+```
+- Steps:
+	* see that `3-4` have red-red relationship
+	* start from the current node: `4` is a right child of `3` & `3` is righ child of `2` and -> Left rotation
+	* Where `x`: 2 & `y`: 3. Why like that? => we need to do
+		only Right rotation, hence we start from the closest root
+	* don't forget to do the re-colouring 
+
+	- Reasons:
+		* new `root` is black: no red-red relationship
+		* num of black nodes in subtrees:
+			- v: n-2
+			- w: n-2
+			- x: n-1
+			- y: n-1
+			- z: n-1
+		=> everything stays the same and works fine
+
+```bash
+		nodes
+			\
+			 3-R -> B
+			 /    \
+	  	 2-B -> R 4-R
+		  / \	  / \
+	  	1-B	 x    y  z
+	  	/ \
+	  	v  w
+```
+
+<h5>Why is R-B tree more efficient than AVL-tree?</h5>
+	- In latter after rotation we may face further rotations
+		in upper levels of the tree
+	- In R-B tree we did only one set of rotations and finish
+
+<h4>Construction of Red-Black tree from scratch</h4>
+
+1. nodes: 10, 20, -10, 15, 17, 40, 50, 60
+2. Concise algorithm:
+```bash
+	if (empty) Black Node
+	else
+		create Red leaf node
+		if (parent is Black) done
+		else
+			if (parent's sibling is red)
+				if (parent' sibling is root)
+					recolour
+				else
+					recolour && recheck
+			else // black
+				if (LL) rotate right
+				if (LR) rotate right-left
+				if (RL) rotate left-right
+				if (RR) rotate left
+```
+
+# FIXME: compare algorithm with drawings at the beginning
+
+All in all, this kind of trees helps to maintain self-balancing factor with the help of colours. As you can see, there are rotations as in AVL-Tree, however, AVL-tree keeps balance with the help of `balance`, whilst Red-Black tree does it via colours.
